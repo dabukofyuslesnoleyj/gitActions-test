@@ -1,7 +1,49 @@
 <html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="requestFunction.js"></script>
+    </head>
 <body>
-<h1>
-TESTING NEW ACTION
-</h1>
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 class="text-center">Example WebApp</h1>
+          </div>
+        </div>
+      </div>
+      
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Add an Item</h2>
+                <label for="username" class="form-label">Input Username</label>
+                <input type="text" class="form-control" id="input_usernamePOST" placeholder="Enter value for username">
+                <label for="input2" class="form-label">Input Description</label>
+                <input type="text" class="form-control" id="input_descriptionPOST" placeholder="Enter value for description">
+                <button type="button" class="btn btn-primary" id="submitPOSTButton">Submit</button>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center">Search for an Item</h2>
+                <label for="input1" class="form-label">Input Username</label>
+                <input type="text" class="form-control" id="input_usernameGET" placeholder="Enter value for username">
+                <button type="button" class="btn btn-primary" id="submitGETButton">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3 id="POST_Output">Add Item Status<span id ="POST_output_span" class="badge rounded-pill text-bg-light">Output</span></h3>
+            </div>
+            <div class="col-md-6">
+                <h3 id="GET_Output">Search Item Status<span id = "GET_output_span" class="badge rounded-pill text-bg-light">Output</span></h3>
+                <h4>Name: </h4>
+                <h5 class="text-body-secondary" id = "output_name">Bob</h5>
+                <h4>Description: </h4>
+                <h5 class="text-body-secondary" id= "output_desc">he is big</h5>
+            </div>
+        </div>
+    </div>
+  
 </body>
 </html>

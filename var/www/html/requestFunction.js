@@ -5,12 +5,12 @@ $(document).ready(function() {
   function sendRequests(requestData) {
     // Make POST request
     var rsp;
-    $.ajax({
+    $.ajax({ 
       url: "https://39wm33ghmb.execute-api.us-east-1.amazonaws.com/default/ReadWriteDDB_Richmond",
       type: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      contentType: "application/json",
+      crossDomain: true,
+      dataType: "json",
       data: JSON.stringify(requestData),
       success: function(response) {
         var responseStatus = { requestStatus: 0, item: response };
@@ -24,6 +24,7 @@ $(document).ready(function() {
         }
         else if(requestData.httpMethod == "POST")
         {
+          console.log("POST");
           POSTOutput(responseStatus);
         }
 
@@ -40,29 +41,44 @@ $(document).ready(function() {
         }
         else if(requestData.httpMethod == "POST")
         {
+          console.log("POST");
           POSTOutput(errorStatus);
         }
       }
     });
 
   }
+  $.ajax({ 
+    url: "https://39wm33ghmb.execute-api.us-east-1.amazonaws.com/default/ReadWriteDDB_Richmond",
+    type: "OPTIONS",
+    contentType: "application/json",
+    crossDomain: true,
+    success: function(response) {
+      console.log(response)
 
+    },
+    error: function(response) {
+      console.log(response)
+    }
+  });
   function GETOutput(rsp)
   {
-    console.log("Request");
     // remove the old class and add the new class
     if(rsp.requestStatus == 1)
     {
-      console.log("Request Failed");
       console.log(rsp.item);
         $("#GET_output_span").removeClass("text-bg-light").addClass("text-bg-danger");
-        $("#GET_output_span").val("Failed");
+        $("#GET_output_span").text('Failed');
+        $("#output_name").text('');
+        $("#output_desc").text('');
     }
     else if(rsp.requestStatus == 0)
     {
-      console.log("Request Success");
         $("#GET_output_span").removeClass("text-bg-light").addClass("text-bg-success");
-        $("#GET_output_span").val("Success");
+        $("#GET_output_span").text('Success');
+        var output = JSON.parse(rsp.item.body);
+        $("#output_name").text(output.Items[0].username);
+        $("#output_desc").text(output.Items[0].description);
     }
   }
   function POSTOutput(rsp)
@@ -70,18 +86,20 @@ $(document).ready(function() {
     if(rsp.requestStatus == 1)
     {
         $("#POST_output_span").removeClass("text-bg-light").addClass("text-bg-danger");
-        $("#POST_output_span").val("Failed");
+        $("#POST_output_span").text("Failed");
     }
     else if(rsp.requestStatus == 0)
     {
         $("#POST_output_span").removeClass("text-bg-light").addClass("text-bg-success");
-        $("#POST_output_span").val("Success");
+        $("#POST_output_span").text("Success");
     }
     else
     {
       $("#POST_output_span").val("Nothing");
     }
   }
+
+    
 
 
     $('#submitPOSTButton').click(function() {
